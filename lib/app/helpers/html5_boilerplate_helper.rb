@@ -30,7 +30,7 @@ module Html5BoilerplateHelper
   end
 
   def remote_jquery(version)
-    if Rails.env == 'development'
+    if Padrino.env == 'development'
       "'jquery', '#{version}', {uncompressed:true}"
     else
       "'jquery', '#{version}'"
@@ -38,7 +38,7 @@ module Html5BoilerplateHelper
   end
 
   def local_jquery(version)
-    if Rails.env == 'development'
+    if Padrino.env == 'development'
       "#{version}/jquery.js"
     else
       "#{version}/jquery.min.js"
