@@ -2,21 +2,56 @@ Compass Html5 Boilerplate
 =========================
 
 HTML5 Boilerplate is a Compass extension based on HTML5 Boilerplate by Paul Irish.
-You can use it to kick-start fully compliant HTML5 applications. Generate either
-stand-alone HTML5 projects, or Rails applications with fully integrated HTML5
-Haml and Sass (Scss) templates.
+You can use it to kick-start fully compliant HTML5 applications. Setup your Rails
+applications with with fully integrated Haml and Sass/Scss templates that implement
+Boilerplate's functionality, or generate stand-alone Html5 Compass projects.
 
 Browse [html5boilerplate.com](http://html5boilerplate.com) for the full workup.
+
+Features
+=========
+(In addition to Html5 Boilerplate itself)
+
+* Html5 Boilerplate stylesheets implemented as a modularized Compass library
+* Lets you pick and choose only the Boilerplate mixins and includes you want
+* Generates sass/scss partials to keep your stylesheets organized
+* Generates modularized haml layouts for Rails apps (header, footer, flashes, etc.)
+* Rails helpers to cleanly hide a little of Boilerplate's html complexity
+* Loads minified jQuery in production envs, but uncompressed version in development
+* Rails jquery-ujs driver installed and loaded along with jQuery and Modernizr
+* Setting API Key in google.yml will auto-load jquery from google (async)
+* Setting Analytics ID in google.yml will auto-load google analytics (async)
+* Uses content_for hooks to keep all your javascript and stylesheets in one place
+* Falls back to native Compass for stuff like clearfix and image replacement
+* Fully commented source, but the haml/sass output remains comment free
+* Not tested on animals
 
 Rails Installation
 ==================
 
-    gem install html5-boilerplate
-    cd my_rails_project
+First, make sure the following gems are in your Gemfile
+
+    gem "compass"
+    gem "haml"
+    gem "html5-boilerplate"
+
+Then run the following
+
+    bundle install
     compass init rails -r html5-boilerplate -u html5-boilerplate --force
 
-**This will install the following files in your rails project:**  
 (Using `--force` flag will overwrite any files that may already exist. In most cases this is probably what you want.)
+
+(For a new project, I answer "Yes" to keep my stylesheets in app/stylesheets, but "No" for compiling them into public/stylesheets/compiled.)
+
+Now remove your application.html.erb so that Haml can do its thing
+
+    mv apps/views/layouts/application.html.erb apps/views/layouts/application.html.old
+
+Start your Rails server, and you're done!
+
+
+**Here's a list of the files that compass init installed in your Rails project:**
 
     app/views/layouts/application.html.haml
     app/views/layouts/_flashes.html.haml
@@ -29,30 +64,28 @@ Rails Installation
     app/stylesheets/style.scss
     app/stylesheets/handheld.scss
     app/stylesheets/partials/_base.scss
-    app/stylesheets/partials/_example.scss
+    app/stylesheets/partials/_overrides.scss
     app/stylesheets/partials/_page.scss
+    app/stylesheets/partials/_fonts.scss
+    app/stylesheets/partials/_media.scss
     
     public/404.html
     public/.htaccess
     public/crossdomain.xml
     public/robots.txt
+    public/humans.txt
     public/apple-touch-icon.png
     public/favicon.ico
 
     public/javascripts/dd_belatedpng.js
-    public/javascripts/jquery-1.4.2.min.js
-    public/javascripts/modernizr-1.5.min.js
+    public/javascripts/jquery.min.js
+    public/javascripts/modernizr.min.js
     public/javascripts/plugins.js
     public/javascripts/rails.js
-    public/javascripts/profiling/charts.swf
-    public/javascripts/profiling/config.js
-    public/javascripts/profiling/yahoo-profiling.css
-    public/javascripts/profiling/yahoo-profiling.min.js
     
     config/compass.rb
     config/initializers/compass.rb
     config/google.yml
-    config/nginx.conf
 
 The Scss files above will automatically get compiled to your Sass compilation directory:
 
@@ -64,23 +97,23 @@ manually add the following line to the top:
 
     require 'html5-boilerplate'
 
-### A few more minor points to store into your brainpan...
-
-If you still have an application.html.erb in your layouts, you will need to loose
-it now so that Rails will use your shiny new application.html.haml layout instead.
+### A few more points...
 
 The haml will compile to the equivalent of html5-boilerplate's index.html,
 but with all comments stripped out, and some additional rails stuff
-like csrf_meta_tags, flashes and the Rails jQuery driver.
+like csrf_meta_tags, flashes and the Rails jquery-ujs driver.
 
 You can set your own Google Analytics Account ID and your Google API Key
-either as ENV variables, or inside config/google.yml.
+either as ENV variables, or inside config/google.yml. (see that file)
 
 This extension has only been tested on Rails3.
 
 
 Stand Alone Installation
 ========================
+
+Use this if you're not using Rails, but still want compass and the html5-boilerplate sass libraries,
+It will create a simplified index.html (with haml source), but without the nice Rails helpers.
 
     gem install html5-boilerplate
     compass create my_project -r html5-boilerplate -u html5-boilerplate --javascripts-dir js --css-dir css
@@ -91,31 +124,29 @@ If you omit them, be sure to edit your javascript and style tags accordingly in 
 **This will create a `my_project` directory containing the following files:**  
 
     index.html
+    index.html.haml
     404.html
     crossdomain.xml
     robots.txt
+    humans.txt
     apple-touch-icon.png
     favicon.ico
     
     src/style.scss
     src/handheld.scss
     src/partials/_base.scss
-    src/partials/_example.scss
+    src/partials/_overrides.scss
     src/partials/_page.scss
+    src/partials/_fonts.scss
+    src/partials/_media.scss
     
     js/dd_belatedpng.js
-    js/jquery-1.4.2.min.js
-    js/modernizr-1.5.min.js
+    js/jquery.min.js
+    js/modernizr.min.js
     js/plugins.js
-    js/profiling/charts.swf
-    js/profiling/config.js
-    js/profiling/yahoo-profiling.css
-    js/profiling/yahoo-profiling.min.js
     
     .htaccess
     config.rb
-    nginx.conf
-    web.config
 
 Run `compass watch my_project` and the SCSS files above will automatically
 get compiled to your Sass compilation directory whenever a change is made:
@@ -129,5 +160,5 @@ License
 HTML5 Boilerplate by Paul Irish  
 (comments left intact in scss files)
 
-Compass Extension Copyright (c) 2010, Peter Gumeson  
+Compass Extension Copyright (c) 2010-2011, Peter Gumeson  
 [http://creativecommons.org/licenses/by/3.0](http://creativecommons.org/licenses/by/3.0)
