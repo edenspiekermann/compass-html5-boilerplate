@@ -1,7 +1,6 @@
 description "Compass extension for HTML5 Boilerplate located at http://html5boilerplate.com"
 
 stylesheet 'style.scss', :media => 'all'
-stylesheet 'handheld.scss', :media => 'handheld'
 stylesheet 'partials/_base.scss'
 stylesheet 'partials/_overrides.scss'
 stylesheet 'partials/_fonts.scss'
@@ -17,18 +16,18 @@ if Compass.configuration.project_type == :rails
   file '_javascripts.html.haml', :to => 'app/views/layouts/_javascripts.html.haml'
   file '_stylesheets.html.haml', :to => 'app/views/layouts/_stylesheets.html.haml'
   file 'files/google.yml', :to => 'config/google.yml'
-  javascript 'javascripts/dd_belatedpng.js', :to => 'dd_belatedpng.js'
-  javascript 'javascripts/jquery-1.5.2.js', :to => 'jquery.js'
-  javascript 'javascripts/jquery-1.5.2.min.js', :to => 'jquery.min.js'
+  javascript 'javascripts/jquery-1.6.js', :to => 'jquery.js'
+  javascript 'javascripts/jquery-1.6.min.js', :to => 'jquery.min.js'
   javascript 'javascripts/modernizr-1.7.min.js', :to => 'modernizr.min.js'
+  javascript 'javascripts/respond.min.js', :to => 'respond.min.js'
   javascript 'javascripts/plugins.js', :to => 'plugins.js'
   javascript 'javascripts/rails.js', :to => 'rails.js'
 else
   html 'index.html.haml'
   file 'index.html.haml'
-  javascript 'javascripts/dd_belatedpng.js', :to => 'dd_belatedpng.js'
-  javascript 'javascripts/jquery-1.5.2.min.js', :to => 'jquery.min.js'
+  javascript 'javascripts/jquery-1.6.min.js', :to => 'jquery.min.js'
   javascript 'javascripts/modernizr-1.7.min.js', :to => 'modernizr.min.js'
+  javascript 'javascripts/respond.min.js', :to => 'respond.min.js'
   javascript 'javascripts/plugins.js', :to => 'plugins.js'
   javascript 'javascripts/script.js', :to => 'script.js'
 end
